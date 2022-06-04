@@ -14,6 +14,7 @@ import ktx.app.KtxScreen
 import ktx.app.clearScreen
 import ktx.assets.disposeSafely
 import ktx.graphics.use
+import java.util.*
 
 class Nupes : KtxGame<KtxScreen>() {
     override fun create() {
@@ -35,6 +36,8 @@ class FirstScreen : KtxScreen, InputProcessor {
 
     private var currentGuess = ""
     private var proposition = propositions.random()
+    private var time = Date()
+    private var guesses = 0
 
     override fun show() {
         Gdx.app.input.inputProcessor = this
@@ -45,7 +48,7 @@ class FirstScreen : KtxScreen, InputProcessor {
         clearScreen(Colors.BLUE.r, Colors.BLUE.g, Colors.BLUE.b)
         batch.use {
             it.draw(background, 0f, 0f)
-            GUI.draw(batch)
+            GUI.draw(guesses, time, batch)
             proposition.draw(currentGuess, TILE * 8, batch)
         }
     }
@@ -70,6 +73,7 @@ class FirstScreen : KtxScreen, InputProcessor {
     private fun guess() {
         proposition.guess(currentGuess)
         currentGuess = ""
+        guesses += 1
     }
 
     override fun resize(width: Int, height: Int) {
