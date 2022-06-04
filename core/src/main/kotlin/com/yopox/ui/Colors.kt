@@ -2,7 +2,7 @@ package com.yopox.ui
 
 import com.badlogic.gdx.graphics.Color
 
-object Color {
+object Colors {
     val BLUE = Color.valueOf("1d2b53")
     val GREEN = Color.valueOf("008751")
     val ORANGE = Color.valueOf("ffa300")

@@ -1,6 +1,11 @@
 package com.yopox.ui
 
-import java.awt.Color
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Pixmap
+import com.badlogic.gdx.graphics.Texture
+import com.yopox.TILE
+
+private val textures = HashMap<Pair<Char, Color>, Texture>()
 
 data class Letter(val char: Char, var color: Color = Color.WHITE) {
     fun indexes(): Pair<Int, Int> = when (char) {
@@ -29,6 +34,31 @@ data class Letter(val char: Char, var color: Color = Color.WHITE) {
         'ù', 'Ù' -> 30 to 12
         '?' -> 31 to 27
         else -> 0 to 0
+    }
+
+    fun texture(): Texture {
+        textures[char to color]?.let { return it }
+
+        val i = indexes()
+        val texture = mrmoRegions[i.first][i.second]
+        texture.texture.textureData.prepare()
+        val pixmap = texture.texture.textureData.consumePixmap()
+        val newPixmap = Pixmap(8, 8, Pixmap.Format.RGBA8888)
+
+        for (y in 0 until pixmap.height)
+            for (x in 0 until pixmap.width)
+                if (pixmap.getPixel(
+                        x + i.second * TILE.toInt(),
+                        y + i.first * TILE.toInt()
+                    ) == -1) {
+                    newPixmap.setColor(color)
+                    newPixmap.drawRectangle(x, y, 1, 1)
+                }
+
+        Texture(newPixmap).let {
+            textures[char to color] = it
+            return it
+        }
     }
 }
 

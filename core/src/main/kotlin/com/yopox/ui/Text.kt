@@ -45,15 +45,11 @@ object Text {
                 offset.y -= 2 * TILE
                 xOffsets.removeAt(0)
             } else {
-                draw(c, pos + offset + vec2(xOffsets.first(), 0f), batch)
+                val pos1 = pos + offset + vec2(xOffsets.first(), 0f)
+                batch.draw(c.texture(), pos1.x, pos1.y)
                 offset.x += TILE
             }
         }
-    }
-
-    fun draw(letter: Letter, pos: Vector2, batch: SpriteBatch) {
-        val indexes = letter.indexes()
-        batch.draw(mrmoRegions[indexes.first][indexes.second], pos.x, pos.y)
     }
 
 }

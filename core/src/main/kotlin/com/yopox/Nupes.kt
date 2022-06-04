@@ -3,7 +3,7 @@ package com.yopox
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.yopox.ui.Color
+import com.yopox.ui.Colors
 import com.yopox.ui.GUI
 import com.yopox.ui.Letter
 import com.yopox.ui.Text
@@ -31,7 +31,7 @@ class FirstScreen : KtxScreen {
 
     override fun render(delta: Float) {
         batch.projectionMatrix = camera.combined
-        clearScreen(Color.BLUE.r, Color.BLUE.g, Color.BLUE.b)
+        clearScreen(Colors.BLUE.r, Colors.BLUE.g, Colors.BLUE.b)
         batch.use {
             GUI.draw(batch)
             Text.draw("Créer un ministère de la\n---------- -----------".map { Letter(it) }, HEIGHT / 2, batch)
