@@ -10,7 +10,7 @@ import com.yopox.Nupes
 fun main() {
     Lwjgl3Application(Nupes(), Lwjgl3ApplicationConfiguration().apply {
         setTitle("nupes")
-        setWindowedMode(640, 480)
+        setWindowedMode(1280 / 2, 720 / 2)
         setWindowIcon(*(arrayOf(128, 64, 32, 16).map { "libgdx$it.png" }.toTypedArray()))
     })
 }
