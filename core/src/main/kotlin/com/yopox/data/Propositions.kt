@@ -52,12 +52,17 @@ class Proposition(before: String, answer: String, after: String) {
             val char = sanitize(text[i])
             if (char !in VALID_CHARS) continue
             when (char) {
-                sanitize(answer[i]) -> found.add(i)
+                sanitize(answer[i]) -> {
+                    GUI.update(char, Colors.ORANGE)
+                    found.add(i)
+                }
                 !in answer -> {
                     GUI.update(char, Colors.RED)
                     guess[i].apply { this.char = UNKNOWN; color = Colors.BLUE }
                 }
                 else -> {
+                    GUI.update(char, Colors.ORANGE)
+
                     val sanitizedAnswer = answer.map { sanitize(it) }
                     val nChar = sanitizedAnswer.count { it == char }
                     val rightChars = text.filterIndexed { index, c -> c == char && sanitizedAnswer[index] == c }
@@ -74,6 +79,12 @@ class Proposition(before: String, answer: String, after: String) {
             if (i in found) guess[i].apply {
                 this.char = answer[i]
                 color = Colors.GREEN
+            }
+        }
+
+        for (c in VALID_CHARS) {
+            if (c in answer && answer.withIndex().filter { it.value == c }.map { it.index }.all { it in found }) {
+                GUI.update(c, Colors.GREEN)
             }
         }
     }
