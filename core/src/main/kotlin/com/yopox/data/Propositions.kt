@@ -10,14 +10,14 @@ import kotlin.math.max
 private const val UNKNOWN = '~'
 
 class Proposition(before: String, answer: String, after: String) {
-    private val before = before.map { Letter(it.lowercaseChar(), Colors.WHITE, Colors.WHITE) }
+    private val before = before.toLetterList(Colors.WHITE, Colors.WHITE)
     private var guess = answer.map {
         when (it.lowercaseChar()) {
             in GIVEN_CHARS -> Letter(it, Colors.WHITE, Colors.WHITE)
             else -> Letter(UNKNOWN, Colors.WHITE, Colors.WHITE)
         }
     }.toMutableList()
-    private val after = after.map { Letter(it.lowercaseChar(), Colors.WHITE, Colors.WHITE) }
+    private val after = after.toLetterList(Colors.WHITE, Colors.WHITE)
 
     private val answer = answer.lowercase()
     private val found = mutableListOf<Int>()
@@ -45,7 +45,7 @@ class Proposition(before: String, answer: String, after: String) {
         if (after.any()) after.draw(posY + totalHeight / 2 - h1 - gap1 - h2 - gap2 - h3 / 2, batch)
 
         // Draw current guess
-        currentGuess.map { Letter(it, Colors.BLUE, Colors.WHITE) }.draw(vec2(answerOffset, posY + totalHeight / 2 - h1 - gap1 - h2 / 2), batch, true)
+        currentGuess.toLetterList(Colors.BLUE, Colors.WHITE).draw(vec2(answerOffset, posY + totalHeight / 2 - h1 - gap1 - h2 / 2), batch, true)
     }
 
     fun completeGuess(currentGuess: String, char: Char): String {

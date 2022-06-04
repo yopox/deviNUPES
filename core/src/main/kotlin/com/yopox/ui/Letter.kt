@@ -10,7 +10,7 @@ private val textures = HashMap<Triple<Pair<Int, Int>, Color, Color>, Texture>()
 const val VALID_CHARS= "abcdefghijklmnopqrstuvwxyzàâçèéêëôùû0123456789"
 const val GIVEN_CHARS = ":;,-/\"()& "
 
-data class Letter(var char: Char, var color: Color = Colors.WHITE, var background: Color = Colors.BLUE) {
+data class Letter(var char: Char, var color: Color = Colors.DEFAULT, var background: Color = Colors.DEFAULT_BG) {
     private fun indexes(): Pair<Int, Int> = when (char) {
         in 'a'..'z' -> 28 to char.code - 'a'.code + 1
         in '0'..'9' -> 27 to 16 + char.code - '0'.code
@@ -66,6 +66,10 @@ data class Letter(var char: Char, var color: Color = Colors.WHITE, var backgroun
             return it
         }
     }
+}
+
+fun String.toLetterList(color: Color = Colors.DEFAULT, background: Color = Colors.DEFAULT_BG): MutableList<Letter> {
+    return map { Letter(it.lowercaseChar(), color, background) }.toMutableList()
 }
 
 fun List<Letter>.string(): String {

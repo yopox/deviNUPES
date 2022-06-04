@@ -8,4 +8,7 @@ object Colors {
     val GREEN: Color = Color.valueOf("008751")
     val ORANGE: Color = Color.valueOf("ffa300")
     val RED: Color = Color.valueOf("ff004d")
+
+    val DEFAULT = WHITE
+    val DEFAULT_BG = BLUE
 }

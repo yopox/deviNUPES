@@ -9,8 +9,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object GUI {
-    private val alphabet = "abcdefghijklmnopqrsuvwxyz".map { Letter(it) }
-    private val numbers = "0123456789".map { Letter(it) }
+    private val alphabet = "abcdefghijklmnopqrsuvwxyz".toLetterList()
+    private val numbers = "0123456789".toLetterList()
     private val dateFormatter = SimpleDateFormat("mm:ss")
 
     fun draw(guesses: Int, time: Date, batch: SpriteBatch) {
@@ -18,8 +18,8 @@ object GUI {
         numbers.draw(vec2(TILE * 2, HEIGHT - TILE * 4), batch)
 
         val timer = dateFormatter.format(Date(Date().time - time.time))
-        timer.map { Letter(it) }.draw(vec2(TILE * 33, HEIGHT - TILE * 5), batch)
-        guesses.toString().map { Letter(it) }.draw(vec2(TILE * 33, HEIGHT - TILE * 3), batch)
+        timer.toLetterList().draw(vec2(TILE * 33, HEIGHT - TILE * 5), batch)
+        guesses.toString().toLetterList().draw(vec2(TILE * 33, HEIGHT - TILE * 3), batch)
     }
 
     fun update(char: Char, color: Color) {
