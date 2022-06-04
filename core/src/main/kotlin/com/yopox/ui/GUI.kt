@@ -28,4 +28,9 @@ object GUI {
             in '0'..'9' -> numbers.firstOrNull { it.char == char }?.color = color
         }
     }
+
+    fun reset() {
+        alphabet.forEach { it.color = Colors.DEFAULT }
+        numbers.forEach { it.color = Colors.DEFAULT }
+    }
 }

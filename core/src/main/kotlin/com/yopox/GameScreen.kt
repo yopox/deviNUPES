@@ -38,6 +38,7 @@ class GameScreen : AbstractScreen() {
                         // TODO: Fini
                     } else {
                         proposition = propositionsSet.removeAt(0)
+                        GUI.reset()
                         state = State.REVEAL
                     }
                 }
