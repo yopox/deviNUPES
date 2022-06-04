@@ -73,4 +73,7 @@ fun List<Letter>.string(): String {
 }
 
 val List<Letter>.height: Float
-    get() = (string().split("\n").size * 2 - 1) * TILE
+    get() = when {
+        this.isEmpty() -> 0f
+        else -> (string().split("\n").size * 2 - 1) * TILE
+    }
