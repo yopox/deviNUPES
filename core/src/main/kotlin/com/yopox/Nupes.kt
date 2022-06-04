@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.yopox.data.propositions
+import com.yopox.data.randomPropositions
 import com.yopox.ui.Colors
 import com.yopox.ui.GUI
 import ktx.app.KtxGame
@@ -33,9 +33,9 @@ class FirstScreen : KtxScreen, InputProcessor {
     private val viewport = FitViewport(WIDTH, HEIGHT, camera)
 
     private val background = Texture("background.png")
-
     private var currentGuess = ""
-    private var proposition = propositions.random()
+    private val propositionsSet = randomPropositions()
+    private var proposition = propositionsSet.removeAt(0)
     private var time = Date()
     private var guesses = 0
 
@@ -64,7 +64,12 @@ class FirstScreen : KtxScreen, InputProcessor {
             }
             State.HIDE -> {
                 if (proposition.hide()) {
-
+                    if (propositionsSet.isEmpty()) {
+                        // TODO: Fini
+                    } else {
+                        proposition = propositionsSet.removeAt(0)
+                        state = State.REVEAL
+                    }
                 }
             }
             else -> Unit
@@ -73,7 +78,7 @@ class FirstScreen : KtxScreen, InputProcessor {
         batch.use {
             it.draw(background, 0f, 0f)
             GUI.draw(guesses, time, batch)
-            proposition.draw(currentGuess, TILE * 9, batch)
+            proposition.draw(currentGuess, TILE * 8, batch)
         }
     }
 

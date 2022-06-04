@@ -18,15 +18,16 @@ fun List<Letter>.draw(posY: Float, batch: SpriteBatch) {
     val xOffsets = len.map { (len.maxOf { i -> i } - it) / 2 * TILE }.toMutableList()
     val centerOffset = (WIDTH - (len.maxOf { it } * TILE)) / 2
 
-    drawStep(this, offset, xOffsets, vec2(centerOffset, posY + height / 2 - TILE), batch)
+    drawStep(this, offset, xOffsets, vec2(centerOffset, posY + height / 2), batch)
 }
 
-fun List<Letter>.draw(pos: Vector2, batch: SpriteBatch) {
+fun List<Letter>.draw(pos: Vector2, batch: SpriteBatch, yShift: Boolean = false) {
     val offset = Vector2()
     val len = string().split("\n").map { it.length }
     val xOffsets = len.map { (len.maxOf { i -> i } - it) / 2 * TILE }.toMutableList()
+    val yOffset = if (yShift) height / 2 else 0f
 
-    drawStep(this, offset, xOffsets, pos, batch)
+    drawStep(this, offset, xOffsets, pos + vec2(0f, yOffset), batch)
 }
 
 private fun drawStep(

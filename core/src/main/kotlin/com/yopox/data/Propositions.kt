@@ -16,7 +16,7 @@ class Proposition(before: String, answer: String, after: String) {
             in GIVEN_CHARS -> Letter(it, Colors.WHITE, Colors.WHITE)
             else -> Letter(UNKNOWN, Colors.WHITE, Colors.WHITE)
         }
-    }
+    }.toMutableList()
     private val after = after.map { Letter(it.lowercaseChar(), Colors.WHITE, Colors.WHITE) }
 
     private val answer = answer.lowercase()
@@ -28,7 +28,7 @@ class Proposition(before: String, answer: String, after: String) {
     private var charCounter = 0
 
     val over: Boolean
-        get() = guess.filter { it.char in VALID_CHARS }.all { it.color == Colors.GREEN }
+        get() = guess.filter { it.char in VALID_CHARS || it.char == UNKNOWN }.all { it.color == Colors.GREEN }
 
     fun draw(currentGuess: String, posY: Float, batch: SpriteBatch) {
         val h1 = before.height
@@ -45,7 +45,7 @@ class Proposition(before: String, answer: String, after: String) {
         if (after.any()) after.draw(posY + totalHeight / 2 - h1 - gap1 - h2 - gap2 - h3 / 2, batch)
 
         // Draw current guess
-        currentGuess.map { Letter(it, Colors.BLUE, Colors.WHITE) }.draw(vec2(answerOffset, posY - TILE / 2), batch)
+        currentGuess.map { Letter(it, Colors.BLUE, Colors.WHITE) }.draw(vec2(answerOffset, posY + totalHeight / 2 - h1 - gap1 - h2 / 2), batch, true)
     }
 
     fun completeGuess(currentGuess: String, char: Char): String {
@@ -59,10 +59,10 @@ class Proposition(before: String, answer: String, after: String) {
 
     fun guess(text: String) {
         lastGuess = text
-        guess = text.map { Letter(it, Colors.BLUE, Colors.WHITE) }
+        text.mapIndexed { index, c -> guess[index] = Letter(c, Colors.BLUE, Colors.WHITE) }
     }
 
-    fun updateGuessChar(i: Int) {
+    private fun updateGuessChar(i: Int) {
         if (i >= answer.length) return
         val char = sanitize(lastGuess[i])
         if (char !in VALID_CHARS) return
@@ -166,15 +166,15 @@ class Proposition(before: String, answer: String, after: String) {
         if (before.any(colorCondition)) {
             val letter = before.first(colorCondition)
             letter.color = Colors.WHITE
-            counter = 1
+            counter = 0
         } else if (guess.any(colorCondition)) {
             val letter = guess.first(colorCondition)
             letter.color = Colors.WHITE
-            counter = 1
+            counter = 0
         } else if (after.any(colorCondition)) {
             val letter = after.first(colorCondition)
             letter.color = Colors.WHITE
-            counter = 1
+            counter = 0
         } else {
             counter = 0
             return true
@@ -186,5 +186,16 @@ class Proposition(before: String, answer: String, after: String) {
 val propositions = listOf(
     Proposition("Inscrire dans la Constitution\nla règle verte, qui impose de", "ne pas prendre plus à la nature", "que ce qu'elle peut reconstituer"),
     Proposition("Rendre le droit à l'eau\net à l'assainissement par", "la gratuité des mètres cubes", "indispensables à la vie digne"),
-    Proposition("", "Créer 300 000 emplois agricoles", "pour instaurer une agriculture\nrelocalisée, diversifiée\net écologique")
+    Proposition("", "Créer 300 000 emplois agricoles", "pour instaurer une agriculture\nrelocalisée, diversifiée\net écologique"),
+    Proposition("Porter immédiatement le", "SMIC mensuel à 1 500 euros net", "et accompagner les TPE/PME"),
+    Proposition("Restaurer le droit à la", "retraite à 60 ans avec 40 annuités", "avec une attention particulière\npour les métiers pénibles"),
 )
+
+fun randomPropositions(): MutableList<Proposition> {
+    val list = mutableListOf<Proposition>()
+    while (list.size < 5) {
+        val p = propositions.random()
+        if (p !in list) list.add(p)
+    }
+    return list
+}
