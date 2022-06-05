@@ -68,17 +68,13 @@ class Proposition(before: String, answer: String, after: String) {
         if (char !in VALID_CHARS) return
         when (char) {
             sanitize(answer[i]) -> {
-                GUI.update(char, Colors.ORANGE)
                 guess[i].apply { this.char = char; color = Colors.GREEN }
                 found.add(i)
             }
             !in answer -> {
-                GUI.update(char, Colors.RED)
                 guess[i].apply { this.char = char; color = Colors.RED }
             }
             else -> {
-                GUI.update(char, Colors.ORANGE)
-
                 val sanitizedAnswer = answer.map { sanitize(it) }
                 val nChar = sanitizedAnswer.count { it == char }
                 val rightChars = lastGuess.filterIndexed { index, c -> c == char && sanitizedAnswer[index] == c }
@@ -110,9 +106,13 @@ class Proposition(before: String, answer: String, after: String) {
     fun update(): Boolean {
         if (charCounter == lastGuess.length) {
             for (c in VALID_CHARS) {
-                if (c in answer && answer.withIndex().filter { it.value == c }.map { it.index }.all { it in found }) {
-                    GUI.update(c, Colors.GREEN)
+                val color = when {
+                    c in answer && answer.withIndex().filter { it.value == c }.map { it.index }.all { it in found } -> Colors.GREEN
+                    c in answer && c in lastGuess && !answer.withIndex().filter { it.value == c }.map { it.index }.all { it in found } -> Colors.ORANGE
+                    c in lastGuess && c !in answer -> Colors.RED
+                    else -> null
                 }
+                color?.let { GUI.update(c, it) }
             }
             charCounter = 0
             counter = 0
