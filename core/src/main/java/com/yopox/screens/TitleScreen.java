@@ -42,9 +42,11 @@ public class TitleScreen extends AbstractScreen {
         int n_OPTIONS = 3;
         switch (keycode) {
             case Input.Keys.UP:
+                SFX.playKeySound();
                 selected = (selected - 1 + n_OPTIONS) % n_OPTIONS;
                 break;
             case Input.Keys.DOWN:
+                SFX.playKeySound();
                 selected = (selected + 1 + n_OPTIONS) % n_OPTIONS;
                 break;
             default:

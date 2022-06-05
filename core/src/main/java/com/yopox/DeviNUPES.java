@@ -3,6 +3,7 @@ package com.yopox;
 import com.badlogic.gdx.Game;
 import com.yopox.screens.PropositionScreen;
 import com.yopox.screens.ResultsScreen;
+import com.yopox.screens.SeedScreen;
 import com.yopox.screens.TitleScreen;
 
 /**
@@ -10,12 +11,14 @@ import com.yopox.screens.TitleScreen;
  */
 public class DeviNUPES extends Game {
 	TitleScreen title;
+	SeedScreen seedScreen;
 	PropositionScreen propositions;
 	ResultsScreen resultsScreen;
 
 	@Override
 	public void create() {
 		title = new TitleScreen(this);
+		seedScreen = new SeedScreen(this);
 		propositions = new PropositionScreen(this);
 		resultsScreen = new ResultsScreen(this);
 		setScreen(title);
@@ -37,6 +40,8 @@ public class DeviNUPES extends Game {
 	}
 
 	public void chooseSeed() {
+		seedScreen.reset();
+		setScreen(seedScreen);
 	}
 
 	public void showTitle() {

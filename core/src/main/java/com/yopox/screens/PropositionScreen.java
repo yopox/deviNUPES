@@ -7,6 +7,7 @@ import com.yopox.data.Propositions;
 import com.yopox.ui.GUI;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Vector;
 
 public class PropositionScreen extends AbstractScreen {
@@ -49,11 +50,12 @@ public class PropositionScreen extends AbstractScreen {
                 chrono = new Chrono();
                 break;
             case SEED_FIVE:
-                dataSet = Propositions.getPropositions(0);
+                dataSet = Propositions.getPropositions(Objects.hashCode(SeedScreen.getSeed()));
                 chrono = new Chrono();
                 break;
-            case TIME_TRIAL:
             case SEED_TIME_TRIAL:
+                Propositions.updateSeed(Objects.hashCode(SeedScreen.getSeed()));
+            case TIME_TRIAL:
                 chrono = new Chrono(60 * 5L);
                 break;
         }

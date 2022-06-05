@@ -4,6 +4,8 @@ import java.util.*;
 
 public class Propositions {
 
+    private static Random random = new Random();
+
     public static class Data {
         final public String before;
         final public String guess;
@@ -16,6 +18,10 @@ public class Propositions {
         }
     }
 
+    public static void updateSeed(int seed) {
+        random = new Random(seed);
+    }
+
     public static Vector<Data> getDailyPropositions() {
         final long time = System.currentTimeMillis();
         return getPropositions((int) Math.floor(time / (1000f * 60 * 60 * 24)));
@@ -23,10 +29,10 @@ public class Propositions {
 
     public static Vector<Data> getPropositions(int seed) {
         final Vector<Data> propositions = new Vector<>();
-        final Random r = new Random(seed);
+        updateSeed(seed);
 
         while (propositions.size() < 5) {
-            final int i = (int) Math.floor(r.nextDouble() * list.size());
+            final int i = (int) Math.floor(random.nextDouble() * list.size());
             if (!propositions.contains(list.get(i))) propositions.add(list.get(i));
         }
         return propositions;
@@ -34,12 +40,9 @@ public class Propositions {
 
     public static Data getNewProposition(HashSet<Data> old) {
         if (old.size() == list.size()) return list.get(0);
-
-        final Random r = new Random();
         Data data = null;
-
         while (data == null || old.contains(data)) {
-            final int i = (int) Math.floor(r.nextDouble() * list.size());
+            final int i = (int) Math.floor(random.nextDouble() * list.size());
             data = list.get(i);
         }
 
@@ -200,5 +203,4 @@ public class Propositions {
                 "qui réorientera le crédit vers\nla bifurcation écologique et\nsociale de la France"
         ));
     }};
-
 }

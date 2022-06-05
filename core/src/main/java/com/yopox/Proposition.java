@@ -173,6 +173,8 @@ public class Proposition {
             return false;
         }
 
+        SFX.playKeySound();
+
         if (before.stream().anyMatch(predicate)) {
             updateFirstAndSetCounter(before, predicate, Colors.BLUE, 1, 2);
         } else if (guess.stream().anyMatch(predicate)) {
@@ -208,7 +210,6 @@ public class Proposition {
             final Letter l = optional.get();
             l.setFg(fg);
             counter = Letter.VALID_CHARS.contains(String.valueOf(l.getCharacter())) ? shortWait : longWait;
-            SFX.KEY.play(SFX.VOLUME / 3);
         }
     }
 
@@ -222,6 +223,7 @@ public class Proposition {
             nextChar = answer.charAt(newGuess.length());
         }
         newGuess.append(c);
+        SFX.playKeySound();
         return newGuess.substring(0, Math.min(newGuess.length(), answer.length()));
     }
 
