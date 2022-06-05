@@ -103,8 +103,10 @@ public class Proposition {
         guess.get(i).setCharacter(lastGuess.charAt(i));
         if (character == sanitize(answer.charAt(i))) {
             guess.get(i).setFg(Colors.GREEN);
+            SFX.GREEN.play(SFX.VOLUME);
             if (!found.contains(i)) found.add(i);
         } else if (!answer.contains(String.valueOf(character))) {
+            SFX.RED.play(SFX.VOLUME);
             guess.get(i).setFg(Colors.RED);
         } else {
             int rightChars = 0;
@@ -125,6 +127,7 @@ public class Proposition {
             final Color color;
             if (nChar > Math.max(rightChars, alreadyFound) + wrongChars) {
                 color = Colors.ORANGE;
+                SFX.ORANGE.play(SFX.VOLUME);
                 GUI.update(character, Colors.ORANGE);
             }
             else color = Colors.BLUE;
@@ -205,6 +208,7 @@ public class Proposition {
             final Letter l = optional.get();
             l.setFg(fg);
             counter = Letter.VALID_CHARS.contains(String.valueOf(l.getCharacter())) ? shortWait : longWait;
+            SFX.KEY.play(SFX.VOLUME / 3);
         }
     }
 

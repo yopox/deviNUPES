@@ -2,10 +2,7 @@ package com.yopox.screens;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.yopox.Chrono;
-import com.yopox.DeviNUPES;
-import com.yopox.Proposition;
-import com.yopox.Util;
+import com.yopox.*;
 import com.yopox.data.Propositions;
 import com.yopox.ui.GUI;
 
@@ -104,6 +101,7 @@ public class PropositionScreen extends AbstractScreen {
             case HIDE:
                 if (proposition.hide()) {
                     if (dataSet.isEmpty() && !Util.isTimeTrial(mode)) {
+                        SFX.WIN.play(SFX.VOLUME);
                         myGame.showResults(guesses, chrono);
                     } else {
                         nextProposition();
@@ -114,6 +112,7 @@ public class PropositionScreen extends AbstractScreen {
                 break;
             case GUESS:
                 if (Util.isTimeTrial(mode) && chrono.isTimeOver()) {
+                    SFX.TIME_OUT.play(SFX.VOLUME);
                     myGame.showResults(guessed, guesses);
                 }
         }

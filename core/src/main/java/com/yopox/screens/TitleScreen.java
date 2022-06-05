@@ -3,6 +3,7 @@ package com.yopox.screens;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.yopox.DeviNUPES;
+import com.yopox.SFX;
 import com.yopox.Util;
 import com.yopox.ui.Colors;
 import com.yopox.ui.Letter;
@@ -48,10 +49,13 @@ public class TitleScreen extends AbstractScreen {
                 break;
             default:
                 if (selected == 0) {
+                    SFX.OK.play(SFX.VOLUME);
                     myGame.startGame(Util.Mode.DAILY);
                 } else if (selected == 1) {
+                    SFX.OK.play(SFX.VOLUME);
                     myGame.startGame(Util.Mode.TIME_TRIAL);
                 } else {
+                    SFX.OK.play(SFX.VOLUME);
                     myGame.chooseSeed();
                 }
                 break;

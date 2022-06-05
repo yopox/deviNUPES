@@ -161,7 +161,7 @@ public class Propositions {
         add(new Data(
                 "",
                 "Rendre l'impôt sur le revenu",
-                "et la contribution sociale généralisée\nvéritablement progressifs avec\nun barème à 14 tranches"
+                "et la c.s.g.\nvéritablement progressifs avec\nun barème à 14 tranches"
         ));
         add(new Data(
                 "Constitutionnaliser le droit au",
