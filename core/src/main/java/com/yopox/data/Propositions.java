@@ -202,5 +202,85 @@ public class Propositions {
                 "Former un pôle public bancaire",
                 "qui réorientera le crédit vers\nla bifurcation écologique et\nsociale de la France"
         ));
+        add(new Data(
+                "Garantir l'accès à l'eau\ncourante potable à tous",
+                "les habitants des Outre-mer",
+                ""
+        ));
+        add(new Data(
+                "Faire de la lutte contre",
+                "la fraude et l'évasion fiscales",
+                "une priorité"
+        ));
+        add(new Data(
+                "",
+                "Réaliser un audit citoyen",
+                "de la dette publique pour\ndéterminer la part illégitime"
+        ));
+        add(new Data(
+                "",
+                "Redonner du pouvoir et des moyens",
+                "aux associations citoyennes et aux\nacteurs de l'éducation populaire"
+        ));
+        add(new Data(
+                "Intégrer ",
+                "l'enjeu écologique",
+                "de la maternelle au lycée"
+        ));
+        add(new Data(
+                "Aller vers",
+                "la gratuité des cantines scolaires",
+                "en lien avec les\ncollectivités locales"
+        ));
+        add(new Data(
+                "Combattre",
+                "l'influence des lobbys",
+                "dans le débat parlementaire"
+        ));
+        add(new Data(
+                "Élire l'Assemblée nationale",
+                "au scrutin proportionnel",
+                ""
+        ));
+        add(new Data(
+                "Supprimer",
+                "la sélection à l'université",
+                "aggravée par Parcoursup"
+        ));
+        add(new Data(
+                "Instaurer le",
+                "Référendum d'initiative citoyenne",
+                "(RIC)"
+        ));
+        add(new Data(
+                "Rembourser",
+                "le traitement hormonal",
+                "de la ménopause"
+        ));
+        add(new Data(
+                "Respecter la dignité et les droits\ndes personnes privées de liberté,\nen finir avec",
+                "la surpopulation carcérale",
+                ""
+        ));
+        add(new Data(
+                "",
+                "Instaurer une tarification",
+                "progressive et différenciée pour\nlutter contre les mésusages et\ngaspillages de l'eau"
+        ));
+        add(new Data(
+                "Passer à la 6e République qui soit",
+                "un régime parlementaire stable",
+                "avec une nouvelle constitution adoptée\npar référendum"
+        ));
+        add(new Data(
+                "",
+                "Former l'ensemble des citoyens",
+                "en matière sanitaire, nucléaire,\nd'inondation ou de\nfeux de forêt"
+        ));
+        add(new Data(
+                "Créer",
+                "un centre national du jeu vidéo",
+                "et développer une filière publique\nde formation dans ce domaine"
+        ));
     }};
 }
