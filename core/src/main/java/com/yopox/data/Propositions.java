@@ -113,7 +113,7 @@ public class Propositions {
         add(new Data(
                 "Interdire",
                 "l'obsolescence programmée",
-                "et allonger les durées de garantie légale\ndes produits"
+                "et allonger les durées de garantie\nlégale des produits"
         ));
     }};
 
