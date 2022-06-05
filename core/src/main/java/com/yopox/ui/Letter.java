@@ -12,10 +12,10 @@ import java.util.Objects;
 import java.util.Vector;
 
 class LetterKey {
-    private int x;
-    private int y;
-    private Color fg;
-    private Color bg;
+    private final int x;
+    private final int y;
+    private final Color fg;
+    private final Color bg;
 
     public LetterKey(int y, int x, Color fg, Color bg) {
         this.x = x;
@@ -56,7 +56,7 @@ class LetterKey {
 
 public class Letter {
     public static final String VALID_CHARS = "abcdefghijklmnopqrstuvwxyzàâçèéêëôùû0123456789";
-    public static final String GIVEN_CHARS = ":;,-/\"()& ";
+    public static final String GIVEN_CHARS = ":;,-/\"()&% ";
     private static final HashMap<LetterKey, Texture> myTextures = new HashMap<>();
 
     private char myChar;
@@ -138,11 +138,11 @@ public class Letter {
     }
 
     public static String stringOf(Vector<Letter> vector) {
-        String result = "";
-        for (int i = 0; i < vector.size(); i++) {
-            result += vector.get(i).getCharacter();
+        StringBuilder result = new StringBuilder();
+        for (Letter letter : vector) {
+            result.append(letter.getCharacter());
         }
-        return result;
+        return result.toString();
     }
 
     public static Float heightOf(Vector<Letter> vector) {

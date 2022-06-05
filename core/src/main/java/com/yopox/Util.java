@@ -13,6 +13,7 @@ public class Util {
         put('!', new IntPair(27, 1));
         put('?', new IntPair(27, 31));
         put('"', new IntPair(27, 2));
+        put('%', new IntPair(27, 5));
         put('&', new IntPair(27, 6));
         put('\'', new IntPair(27, 7));
         put('(', new IntPair(27, 8));
@@ -30,6 +31,7 @@ public class Util {
         put('é', new IntPair(29, 29));
         put('ê', new IntPair(29, 30));
         put('ë', new IntPair(29, 31));
+        put('î', new IntPair(30, 2));
         put('ô', new IntPair(30, 8));
         put('ù', new IntPair(30, 12));
         put('û', new IntPair(30, 14));

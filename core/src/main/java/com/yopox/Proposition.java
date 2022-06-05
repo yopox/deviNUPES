@@ -7,6 +7,7 @@ import com.yopox.ui.GUI;
 import com.yopox.ui.Letter;
 import com.yopox.ui.Text;
 
+import java.util.Optional;
 import java.util.Vector;
 import java.util.function.Predicate;
 
@@ -145,6 +146,8 @@ public class Proposition {
             case 'ê':
             case 'ë':
                 return 'e';
+            case 'î':
+                return 'i';
             case 'ô':
                 return 'o';
             case 'ù':
@@ -192,18 +195,24 @@ public class Proposition {
     }
 
     private void updateFirstAndSetCounter(Vector<Letter> text, Predicate<Letter> predicate, Color fg, int shortWait, int longWait) {
-        final Letter l = text.stream().filter(predicate).findFirst().get();
-        l.setFg(fg);
-        counter = Letter.VALID_CHARS.contains(String.valueOf(l.getCharacter())) ? shortWait : longWait;
+        final Optional<Letter> optional = text.stream().filter(predicate).findFirst();
+        if (optional.isPresent()) {
+            final Letter l = optional.get();
+            l.setFg(fg);
+            counter = Letter.VALID_CHARS.contains(String.valueOf(l.getCharacter())) ? shortWait : longWait;
+        }
     }
 
     public String completeGuess(String currentGuess, char c) {
         if (!Letter.VALID_CHARS.contains(String.valueOf(Character.toLowerCase(c)))) return currentGuess;
         if (currentGuess.length() == answer.length()) return currentGuess;
-        String newGuess = currentGuess + c;
-        final char nextChar = answer.charAt(currentGuess.length());
-        if (Letter.GIVEN_CHARS.contains(String.valueOf(nextChar)))
-            newGuess = currentGuess + nextChar + c;
+        StringBuilder newGuess = new StringBuilder(currentGuess);
+        char nextChar = answer.charAt(newGuess.length());
+        while (Letter.GIVEN_CHARS.contains(String.valueOf(nextChar))) {
+            newGuess.append(nextChar);
+            nextChar = answer.charAt(newGuess.length());
+        }
+        newGuess.append(c);
         return newGuess.substring(0, Math.min(newGuess.length(), answer.length()));
     }
 
