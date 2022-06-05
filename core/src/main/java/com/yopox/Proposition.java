@@ -2,6 +2,7 @@ package com.yopox;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.yopox.data.Propositions;
 import com.yopox.ui.Colors;
 import com.yopox.ui.GUI;
 import com.yopox.ui.Letter;
@@ -25,6 +26,10 @@ public class Proposition {
     private String lastGuess = "";
     private int counter = 0;
     private int charCounter = 0;
+
+    public Proposition(Propositions.Data data) {
+        this(data.before, data.guess, data.after);
+    }
 
     public Proposition(String before, String answer, String after) {
         this.answer = answer;

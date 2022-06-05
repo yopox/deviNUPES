@@ -3,7 +3,7 @@ package com.yopox.gwt;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.yopox.Devinupes;
+import com.yopox.DeviNUPES;
 
 /** Launches the GWT application. */
 public class GwtLauncher extends GwtApplication {
@@ -21,6 +21,6 @@ public class GwtLauncher extends GwtApplication {
 
 		@Override
 		public ApplicationListener createApplicationListener () {
-			return new Devinupes();
+            return new DeviNUPES();
 		}
 }

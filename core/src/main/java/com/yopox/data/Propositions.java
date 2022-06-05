@@ -1,9 +1,6 @@
 package com.yopox.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 public class Propositions {
 
@@ -19,14 +16,39 @@ public class Propositions {
         }
     }
 
-    public static Vector<Data> getRandomPropositions() {
+    public static Vector<Data> getDailyPropositions() {
+        final GregorianCalendar cal = new GregorianCalendar();
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+
+        return getPropositions(Objects.hash(day, month, year));
+    }
+
+    public static Vector<Data> getPropositions(int seed) {
         final Vector<Data> propositions = new Vector<>();
-        final Random r = new Random();
+        final Random r = new Random(seed);
+
         while (propositions.size() < 5) {
             final int i = (int) Math.floor(r.nextDouble() * list.size());
             if (!propositions.contains(list.get(i))) propositions.add(list.get(i));
         }
         return propositions;
+    }
+
+    public static Data getNewProposition(HashSet<Data> old) {
+        if (old.size() == list.size()) return list.get(0);
+
+        final Random r = new Random();
+        Data data = null;
+
+        while (data == null || old.contains(data)) {
+            final int i = (int) Math.floor(r.nextDouble() * list.size());
+            data = list.get(i);
+        }
+
+        old.add(data);
+        return data;
     }
 
     public final static List<Data> list = new ArrayList<Data>() {{
@@ -81,7 +103,7 @@ public class Propositions {
                 ""
         ));
         add(new Data(
-                "Garantir l'accès à tous\nles services publics essentiels",
+                "Garantir l'accès à tous\ndes services publics essentiels",
                 "à moins de 15 à 30 min",
                 "de tout lieu d'habitation"
         ));

@@ -7,9 +7,21 @@ public class Util {
     public static final Float WIDTH = TILE * 40;
     public static final Float HEIGHT = TILE * 22;
 
+    public enum Mode {
+        DAILY,
+        TIME_TRIAL,
+        SEED_FIVE,
+        SEED_TIME_TRIAL,
+    }
+
+    public static boolean isTimeTrial(Mode mode) {
+        return mode == Mode.TIME_TRIAL || mode == Mode.SEED_TIME_TRIAL;
+    }
+
     public static HashMap<Character, IntPair> indexes = new HashMap<Character, IntPair>() {{
         put('>', new IntPair(0, 15));
         put('~', new IntPair(16, 24));
+        put('=', new IntPair(23, 15));
         put('!', new IntPair(27, 1));
         put('?', new IntPair(27, 31));
         put('"', new IntPair(27, 2));

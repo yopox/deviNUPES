@@ -2,7 +2,7 @@ package com.yopox.screens;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.yopox.Devinupes;
+import com.yopox.DeviNUPES;
 import com.yopox.Util;
 import com.yopox.ui.Colors;
 import com.yopox.ui.Letter;
@@ -13,15 +13,14 @@ import java.util.Vector;
 public class TitleScreen extends AbstractScreen {
     private static final Texture background = new Texture("title.png");
 
-    private Vector<Letter> option1 = Letter.listOf("Partie du jour", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
-    private Vector<Letter> option2 = Letter.listOf("5 minutes chrono", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
-    private Vector<Letter> option3 = Letter.listOf("Mode duel", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
+    private final Vector<Letter> option1 = Letter.listOf("Partie du jour", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
+    private final Vector<Letter> option2 = Letter.listOf("5 minutes chrono", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
+    private final Vector<Letter> option3 = Letter.listOf("Mode duel", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
 
-    private Vector<Letter> arrow = Letter.listOf(">", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
-    private final int N_OPTIONS = 3;
+    private final Vector<Letter> arrow = Letter.listOf(">", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
     private int selected = 0;
 
-    public TitleScreen(Devinupes game) {
+    public TitleScreen(DeviNUPES game) {
         super(game);
     }
 
@@ -39,15 +38,22 @@ public class TitleScreen extends AbstractScreen {
 
     @Override
     public boolean keyUp(int keycode) {
+        int n_OPTIONS = 3;
         switch (keycode) {
             case Input.Keys.UP:
-                selected = (selected - 1 + N_OPTIONS) % N_OPTIONS;
+                selected = (selected - 1 + n_OPTIONS) % n_OPTIONS;
                 break;
             case Input.Keys.DOWN:
-                selected = (selected + 1 + N_OPTIONS) % N_OPTIONS;
+                selected = (selected + 1 + n_OPTIONS) % n_OPTIONS;
                 break;
             default:
-                myGame.startGame();
+                if (selected == 0) {
+                    myGame.startGame(Util.Mode.DAILY);
+                } else if (selected == 1) {
+                    myGame.startGame(Util.Mode.TIME_TRIAL);
+                } else {
+                    myGame.chooseSeed();
+                }
                 break;
         }
         return true;

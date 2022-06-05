@@ -3,7 +3,7 @@
 <module rename-to="html">
     <source path="" />
 	<inherits name="com.badlogic.gdx.backends.gdx_backends_gwt" />
-	<inherits name="com.yopox.Devinupes" />
+	<inherits name="com.yopox.DeviNUPES"/>
     <entry-point class="com.yopox.gwt.GwtLauncher" />
     <set-configuration-property name="gdx.assetpath" value="../assets" />
     <set-configuration-property name="xsiframe.failIfScriptTag" value="FALSE"/>

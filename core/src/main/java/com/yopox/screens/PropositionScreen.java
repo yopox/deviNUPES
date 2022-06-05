@@ -3,25 +3,29 @@ package com.yopox.screens;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.yopox.Chrono;
-import com.yopox.Devinupes;
+import com.yopox.DeviNUPES;
 import com.yopox.Proposition;
 import com.yopox.Util;
 import com.yopox.data.Propositions;
 import com.yopox.ui.GUI;
 
+import java.util.HashSet;
 import java.util.Vector;
 
 public class PropositionScreen extends AbstractScreen {
     private static final Texture background = new Texture("background.png");
 
     private Vector<Propositions.Data> dataSet = new Vector<>();
+    private final HashSet<Propositions.Data> oldData = new HashSet<>();
     private Proposition proposition = new Proposition("", "", "");
 
     private String currentGuess = "";
     private Chrono chrono = new Chrono();
     private int guesses = 0;
+    private int guessed = 0;
+    private Util.Mode mode = Util.Mode.DAILY;
 
-    public PropositionScreen(Devinupes game) {
+    public PropositionScreen(DeviNUPES game) {
         super(game);
     }
 
@@ -34,15 +38,44 @@ public class PropositionScreen extends AbstractScreen {
 
     private State myState = State.REVEAL;
 
-    public void reset() {
-        dataSet = Propositions.getRandomPropositions();
-        chrono = new Chrono();
+    public void reset(Util.Mode mode) {
+        this.mode = mode;
+        GUI.reset();
+        guesses = 0;
+        guessed = 0;
+        oldData.clear();
+        dataSet.clear();
+        currentGuess = "";
+        switch (mode) {
+            case DAILY:
+                dataSet = Propositions.getDailyPropositions();
+                chrono = new Chrono();
+                break;
+            case SEED_FIVE:
+                dataSet = Propositions.getPropositions(0);
+                chrono = new Chrono();
+                break;
+            case TIME_TRIAL:
+            case SEED_TIME_TRIAL:
+                chrono = new Chrono(60 * 5L);
+                break;
+        }
         nextProposition();
+        myState = State.REVEAL;
     }
 
     private void nextProposition() {
-        final Propositions.Data data = dataSet.remove(0);
-        proposition = new Proposition(data.before, data.guess, data.after);
+        switch (mode) {
+            case DAILY:
+            case SEED_FIVE:
+                final Propositions.Data data = dataSet.remove(0);
+                proposition = new Proposition(data.before, data.guess, data.after);
+                break;
+            case TIME_TRIAL:
+            case SEED_TIME_TRIAL:
+                proposition = new Proposition(Propositions.getNewProposition(oldData));
+                break;
+        }
     }
 
     @Override
@@ -59,8 +92,10 @@ public class PropositionScreen extends AbstractScreen {
                 break;
             case ANIMATE_GUESS:
                 if (proposition.update()) {
-                    if (proposition.isOver()) myState = State.HIDE;
-                    else {
+                    if (proposition.isOver()) {
+                        myState = State.HIDE;
+                        guessed += 1;
+                    } else {
                         myState = State.GUESS;
                         chrono.start();
                     }
@@ -68,8 +103,8 @@ public class PropositionScreen extends AbstractScreen {
                 break;
             case HIDE:
                 if (proposition.hide()) {
-                    if (dataSet.isEmpty()) {
-                        // TODO: Fini
+                    if (dataSet.isEmpty() && !Util.isTimeTrial(mode)) {
+                        myGame.showResults(guesses, chrono);
                     } else {
                         nextProposition();
                         GUI.reset();
@@ -77,6 +112,10 @@ public class PropositionScreen extends AbstractScreen {
                     }
                 }
                 break;
+            case GUESS:
+                if (Util.isTimeTrial(mode) && chrono.isTimeOver()) {
+                    myGame.showResults(guessed, guesses);
+                }
         }
 
         myBatch.begin();

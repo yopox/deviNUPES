@@ -7,17 +7,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.yopox.Devinupes;
+import com.yopox.DeviNUPES;
 import com.yopox.Util;
 import com.yopox.ui.Colors;
 
 public abstract class AbstractScreen implements InputProcessor, Screen {
-    final Devinupes myGame;
+    final DeviNUPES myGame;
     final SpriteBatch myBatch = new SpriteBatch();
     final OrthographicCamera myCamera = new OrthographicCamera();
     final FitViewport myViewport = new FitViewport(Util.WIDTH, Util.HEIGHT, myCamera);
 
-    public AbstractScreen(Devinupes game) {
+    public AbstractScreen(DeviNUPES game) {
         myGame = game;
     }
 

@@ -30,6 +30,10 @@ public class Chrono {
         }
     }
 
+    public boolean isTimeOver() {
+        return !forward && count <= 0;
+    }
+
     @Override
     public String toString() {
         final int seconds = (int) Math.floor(count);
