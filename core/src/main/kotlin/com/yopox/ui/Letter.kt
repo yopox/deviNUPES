@@ -14,6 +14,7 @@ data class Letter(var char: Char, var color: Color = Colors.DEFAULT, var backgro
     private fun indexes(): Pair<Int, Int> = when (char) {
         in 'a'..'z' -> 28 to char.code - 'a'.code + 1
         in '0'..'9' -> 27 to 16 + char.code - '0'.code
+        '>' -> 0 to 15
         '!' -> 27 to 1
         '?' -> 27 to 31
         '"' -> 27 to 2
