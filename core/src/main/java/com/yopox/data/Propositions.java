@@ -154,7 +154,7 @@ public class Propositions {
         add(new Data(
                 "",
                 "Développer les circuits courts",
-                "pour réduire la circulation des\nmarchandises et l'utilisation d'emballages"
+                "pour réduire la circulation des\nmarchandises et l'utilisation\nd'emballages"
         ));
         add(new Data(
                 "Intégrer",
@@ -182,18 +182,18 @@ public class Propositions {
                 ""
         ));
         add(new Data(
-                "",
-                "Garantir la variété des langues vivantes",
-                "enseignées et leur apprentissage dès le CP"
+                "Garantir",
+                "la variété des langues vivantes",
+                "enseignées et leur apprentissage\ndès le CP"
         ));
         add(new Data(
-                "Interdire tout usage des technologies de",
+                "Interdire tout usage de la",
                 "reconnaissance faciale",
-                "dans les espaces et établissements publics"
+                "dans les espaces et\nétablissements publics"
         ));
 
         add(new Data(
-                "S'attaquer aux causes des addictions,\nplutôt que de continuer une politique de",
+                "S'attaquer aux causes des addictions,\nplutôt que de continuer\nune politique de",
                 "répression des consommateurs",
                 ""
         ));
