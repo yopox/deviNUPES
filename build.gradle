@@ -9,7 +9,6 @@ buildscript {
 		maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
 	}
 	dependencies {
-		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 		classpath "org.wisepersist:gwt-gradle-plugin:$gwtPluginVersion"
 
 		// This follows advice from https://blog.gradle.org/log4j-vulnerability
@@ -32,7 +31,6 @@ allprojects {
 
 configure(subprojects) {
 	apply plugin: 'java-library'
-	apply plugin: 'kotlin'
 	sourceCompatibility = 1.8
 	compileJava {
 		options.incremental = true
@@ -54,7 +52,7 @@ configure(subprojects) {
 
 subprojects {
 	version = '0.0.1'
-	ext.appName = 'nupes'
+	ext.appName = 'deviNUPES'
 	repositories {
 		mavenCentral()
 		maven { url 'https://s01.oss.sonatype.org' }
@@ -66,4 +64,4 @@ subprojects {
 	}
 }
 
-eclipse.project.name = 'nupes' + '-parent'
+eclipse.project.name = 'deviNUPES' + '-parent'
