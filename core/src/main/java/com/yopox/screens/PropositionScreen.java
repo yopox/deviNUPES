@@ -89,20 +89,21 @@ public class PropositionScreen extends AbstractScreen {
     @Override
     public boolean keyUp(int keycode) {
         if (myState != State.GUESS) return false;
-        if (keycode >= Input.Keys.A && keycode <= Input.Keys.Z) {
-            type((char) (keycode - Input.Keys.A + 97));
-        } else if (keycode >= Input.Keys.NUM_0 && keycode <= Input.Keys.NUM_9) {
-            type((char) (keycode - Input.Keys.NUM_0 + 48));
-        } else {
-            switch (keycode) {
-                case Input.Keys.ENTER:
-                    guess();
-                    break;
-                case Input.Keys.BACKSPACE:
-                    backspace();
-                    break;
-            }
+        switch (keycode) {
+            case Input.Keys.ENTER:
+                guess();
+                break;
+            case Input.Keys.BACKSPACE:
+                backspace();
+                break;
         }
+        return true;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        if (myState != State.GUESS) return false;
+        type(character);
         return true;
     }
 

@@ -55,7 +55,7 @@ class LetterKey {
 }
 
 public class Letter {
-    public static final String VALID_CHARS = "abcdefghijklmnopqrstuvwxyzàâçèéêëôùû0123456789";
+    public static final String VALID_CHARS = "abcdefghijklmnopqrstuvwxyzàâçèéêëîôùû0123456789";
     public static final String GIVEN_CHARS = ":;,-/\"()&% ";
     private static final HashMap<LetterKey, Texture> myTextures = new HashMap<>();
 
