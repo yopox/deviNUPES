@@ -14,8 +14,8 @@ public class TitleScreen extends AbstractScreen {
     private static final Texture background = new Texture("title.png");
 
     private Vector<Letter> option1 = Letter.listOf("Partie classique", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
-    private Vector<Letter> option2 = Letter.listOf("Contre la montre (5 min)", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
-    private Vector<Letter> option3 = Letter.listOf("Contre la montre (1 min)", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
+    private Vector<Letter> option2 = Letter.listOf("5 minutes chrono", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
+    private Vector<Letter> option3 = Letter.listOf("1 minute  chrono", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
 
     private Vector<Letter> arrow = Letter.listOf(">", Colors.DEFAULT_FG, Colors.DEFAULT_BG);
     private final int N_OPTIONS = 3;
@@ -30,10 +30,10 @@ public class TitleScreen extends AbstractScreen {
         super.render(delta);
         myBatch.begin();
         myBatch.draw(background, 0f, 0f);
-        Text.draw(option1, Util.TILE * 14, Util.TILE * 12, false, myBatch);
-        Text.draw(option2, Util.TILE * 14, Util.TILE * 10, false, myBatch);
-        Text.draw(option3, Util.TILE * 14, Util.TILE * 8, false, myBatch);
-        Text.draw(arrow, Util.TILE * 12, Util.TILE * 12 - selected * 2 * Util.TILE, false, myBatch);
+        Text.draw(option1, Util.TILE * 12, Util.TILE * 8, false, myBatch);
+        Text.draw(option2, Util.TILE * 12, Util.TILE * 6, false, myBatch);
+        Text.draw(option3, Util.TILE * 12, Util.TILE * 4, false, myBatch);
+        Text.draw(arrow, Util.TILE * 9, Util.TILE * 8 - selected * 2 * Util.TILE, false, myBatch);
         myBatch.end();
     }
 

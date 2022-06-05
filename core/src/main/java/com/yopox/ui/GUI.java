@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.yopox.Util;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.Vector;
+import java.util.stream.Stream;
 
 public class GUI {
     private static Vector<Letter> alphabet = Letter.listOf("abcdefghijklmnopqrstuvwxyz", Colors.WHITE, Colors.BLUE);
@@ -22,12 +24,16 @@ public class GUI {
     }
 
     public static void update(char c, Color color) {
-        if (c >= 'a' && c <= 'z') {
-            final Letter letter = alphabet.stream().filter(l -> l.getCharacter() == c).findFirst().get();
-            if (color != Colors.ORANGE || letter.getFg() != Colors.GREEN) letter.setFg(color);
-        } else if (c >= '0' && c <= '9') {
-            final Letter letter = numbers.stream().filter(l -> l.getCharacter() == c).findFirst().get();
-            if (color != Colors.ORANGE || letter.getFg() != Colors.GREEN) letter.setFg(color);
+        Stream<Letter> stream = null;
+        if (c >= 'a' && c <= 'z') stream = alphabet.stream();
+        else if (c >= '0' && c <= '9') stream = numbers.stream();
+
+        if (stream != null) {
+            final Optional<Letter> optional = stream.filter(l -> l.getCharacter() == c).findFirst();
+            if (optional.isPresent()) {
+                final Letter letter = optional.get();
+                if (color != Colors.ORANGE || letter.getFg() != Colors.GREEN) letter.setFg(color);
+            }
         }
     }
 
