@@ -17,12 +17,8 @@ public class Propositions {
     }
 
     public static Vector<Data> getDailyPropositions() {
-        final GregorianCalendar cal = new GregorianCalendar();
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-
-        return getPropositions(Objects.hash(day, month, year));
+        final long time = System.currentTimeMillis();
+        return getPropositions((int) Math.floor(time / (1000f * 60 * 60 * 24)));
     }
 
     public static Vector<Data> getPropositions(int seed) {
