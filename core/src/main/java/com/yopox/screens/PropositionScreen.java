@@ -88,10 +88,9 @@ public class PropositionScreen extends AbstractScreen {
 
     @Override
     public boolean keyUp(int keycode) {
-        if (myState != State.GUESS) return false;
         switch (keycode) {
             case Input.Keys.ENTER:
-                guess();
+                if (myState == State.GUESS) guess();
                 break;
             case Input.Keys.BACKSPACE:
                 backspace();
@@ -102,7 +101,6 @@ public class PropositionScreen extends AbstractScreen {
 
     @Override
     public boolean keyTyped(char character) {
-        if (myState != State.GUESS) return false;
         type(character);
         return true;
     }
