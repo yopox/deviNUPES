@@ -2,23 +2,23 @@ package com.yopox.screens;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.yopox.Chrono;
 import com.yopox.Devinupes;
 import com.yopox.Proposition;
 import com.yopox.Util;
 import com.yopox.data.Propositions;
 import com.yopox.ui.GUI;
 
-import java.util.Date;
 import java.util.Vector;
 
 public class PropositionScreen extends AbstractScreen {
-    private static Texture background = new Texture("background.png");
+    private static final Texture background = new Texture("background.png");
 
     private Vector<Propositions.Data> dataSet = new Vector<>();
     private Proposition proposition = new Proposition("", "", "");
 
     private String currentGuess = "";
-    private Date time = new Date();
+    private Chrono chrono = new Chrono();
     private int guesses = 0;
 
     public PropositionScreen(Devinupes game) {
@@ -36,6 +36,7 @@ public class PropositionScreen extends AbstractScreen {
 
     public void reset() {
         dataSet = Propositions.getRandomPropositions();
+        chrono = new Chrono();
         nextProposition();
     }
 
@@ -47,17 +48,22 @@ public class PropositionScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        chrono.update(delta);
 
         switch (myState) {
             case REVEAL:
                 if (proposition.reveal()) {
                     myState = State.GUESS;
+                    chrono.start();
                 }
                 break;
             case ANIMATE_GUESS:
                 if (proposition.update()) {
                     if (proposition.isOver()) myState = State.HIDE;
-                    else myState = State.GUESS;
+                    else {
+                        myState = State.GUESS;
+                        chrono.start();
+                    }
                 }
                 break;
             case HIDE:
@@ -76,7 +82,7 @@ public class PropositionScreen extends AbstractScreen {
         myBatch.begin();
         myBatch.draw(background, 0f, 0f);
         proposition.draw(currentGuess, Util.TILE * 8, myBatch);
-        GUI.draw(guesses, time, myBatch);
+        GUI.draw(guesses, chrono, myBatch);
         myBatch.end();
     }
 
@@ -108,6 +114,7 @@ public class PropositionScreen extends AbstractScreen {
         proposition.guess(currentGuess);
         currentGuess = "";
         guesses += 1;
+        chrono.stop();
         myState = State.ANIMATE_GUESS;
     }
 
