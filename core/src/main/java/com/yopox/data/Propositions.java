@@ -137,6 +137,72 @@ public class Propositions {
                 "l'obsolescence programmée",
                 "et allonger les durées de garantie\nlégale des produits"
         ));
+        add(new Data(
+                "Arrêter les subventions",
+                "aux énergies fossiles",
+                "y compris à l'étranger"
+        ));
+        add(new Data(
+                "Interdire la publicité",
+                "des produits les plus émetteurs",
+                "de gaz à effet de serre sur\ntous les supports publicitaires"
+        ));
+        add(new Data(
+                "Lutter contre",
+                "l'artificialisation des sols",
+                "pour empêcher la disparition\nde surfaces agricoles utiles"
+        ));
+        add(new Data(
+                "",
+                "Développer les circuits courts",
+                "pour réduire la circulation des\nmarchandises et l'utilisation d'emballages"
+        ));
+        add(new Data(
+                "Intégrer",
+                "l'éducation à la nutrition",
+                "dans les programmes scolaires"
+        ));
+        add(new Data(
+                "",
+                "Rendre l'impôt sur le revenu",
+                "et la contribution sociale généralisée\nvéritablement progressifs avec\nun barème à 14 tranches"
+        ));
+        add(new Data(
+                "Constitutionnaliser le droit au",
+                "chiffrement des données",
+                "et des communications"
+        ));
+        add(new Data(
+                "Reconnaître",
+                "un droit de pétition numérique",
+                "pour envoyer une loi à l'ordre\ndu jour des assemblées"
+        ));
+        add(new Data(
+                "Instaurer une taxe significative",
+                "sur les transactions financières",
+                ""
+        ));
+        add(new Data(
+                "",
+                "Garantir la variété des langues vivantes",
+                "enseignées et leur apprentissage dès le CP"
+        ));
+        add(new Data(
+                "Interdire tout usage des technologies de",
+                "reconnaissance faciale",
+                "dans les espaces et établissements publics"
+        ));
+
+        add(new Data(
+                "S'attaquer aux causes des addictions,\nplutôt que de continuer une politique de",
+                "répression des consommateurs",
+                ""
+        ));
+        add(new Data(
+                "",
+                "Former un pôle public bancaire",
+                "qui réorientera le crédit vers\nla bifurcation écologique et\nsociale de la France"
+        ));
     }};
 
 }
