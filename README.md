@@ -1,30 +1,28 @@
+[![libGDX](https://img.shields.io/badge/libGDX-1.11.0-orange.svg)](https://libgdx.com)
+[![itch](https://img.shields.io/badge/play%20on%20itch.io-29adff.svg)](https://yopox.itch.io/devinupes)
+
 # deviNUPES
 
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
+deviNUPES est un jeu développé pour
+la [Game Jam NUPES](https://itch.io/jam/game-jam-nouvelle-union-populaire-ecologique-et-social).
 
-This project was generated with a template including simple application launchers and an `ApplicationListener` implementation that listens to user input.
+<p align="center">
+    <img src="https://img.itch.zone/aW1nLzkxMjA0MjQucG5n/315x250%23c/k0iza5.png" />
+</p>
 
-## Gradle
+## Contrôles
 
-This project uses [Gradle](http://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
+Utilisez le clavier pour compléter les propositions, les flèches directionnelles pour choisir un mode de jeu et la
+touche entrée pour valider.
 
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `html:dist`: compiles GWT sources. The compiled application can be found at `html/build/dist`: you can use any HTTP server to deploy it.
-- `html:superDev`: compiles GWT sources and runs the application in SuperDev mode. It will be available at [localhost:8080/html](http://localhost:8080/html). Use only during development.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
+## Modes
 
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+- **Partie du jour** : 5 mesures différentes à trouver chaque jour.
+- **5 minutes chrono** : Essayez de trouver le plus de mesures en 5 minutes !
+- **Mode duel** : Entrez le même code qu'un ami et préparez-vous au duel  !
+
+## Équipe
+
+- **yopox** : dev
+- **victor** : tri des mesures
+- **on100balec** : SFX
